@@ -1,0 +1,18 @@
+services:
+  mysql:
+    image: mysql:8.0
+    environment:
+      MYSQL_ROOT_PASSWORD: ${storage.database.core-db.password}
+      MYSQL_DATABASE: core_db
+      MYSQL_USER: ${storage.database.core-db.username}
+      MYSQL_PASSWORD: ${storage.database.core-db.password}
+    ports:
+      - "3306:3306"
+    volumes:
+      - core-db-data:/var/lib/mysql
+    networks:
+      - storage-network
+
+volumes:
+  core-db-data:
+      driver: local
